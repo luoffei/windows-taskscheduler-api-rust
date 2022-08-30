@@ -44,7 +44,7 @@ fn create_task(name: &str) -> windows_taskscheduler::Result<RegisteredTask> {
         .idle_trigger(idle_trigger)?
         // .logon_trigger(logon_trigger)?
         .exec_action(action)?
-        .principal(RunLevel::LUA, "", "")?
+        .principal(RunLevel::LUA, "", "", "")?
         .set_hidden(false)?
         .register(name)
 }

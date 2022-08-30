@@ -145,7 +145,7 @@ impl Task {
         Ok(self)
     }
 
-    pub fn principal(self, run_level: RunLevel, id: &str, user_id: &str) -> Result<Self> {
+    pub fn principal(self, run_level: RunLevel, id: &str, group_id: &str, user_id: &str) -> Result<Self> {
         unsafe {
             let principal: IPrincipal = self.task_definition.Principal()?;
             match run_level {
@@ -153,6 +153,7 @@ impl Task {
                 RunLevel::LUA => principal.SetRunLevel(TASK_RUNLEVEL_LUA)?,
             }
             principal.SetId(BSTR::from(id))?;
+            principal.SetGroupId(BSTR::from(group_id))?;
             principal.SetUserId(BSTR::from(user_id))?;
         }
         Ok(self)
